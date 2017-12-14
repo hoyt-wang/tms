@@ -3,7 +3,7 @@ package com.kaishengit.tms.auth;
 
 import com.kaishengit.tms.entity.Account;
 import com.kaishengit.tms.entity.Role;
-import com.kaishengit.tms.service.AccountService;
+import com.kaishengit.tms.system.service.AccountService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

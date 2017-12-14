@@ -1,10 +1,11 @@
 package com.kaishengit.tms.finance.api;
 
 import com.kaishengit.tms.entity.Account;
-import com.kaishengit.tms.service.AccountService;
+import com.kaishengit.tms.system.service.AccountService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
@@ -77,6 +78,10 @@ public class HomeController {
         } catch (AuthenticationException ex) {
             ex.printStackTrace();
             redirectAttributes.addFlashAttribute("message","账号或密码错误");
+            return "redirect:/";
+        } catch (AuthorizationException ex) {
+            ex.printStackTrace();
+            redirectAttributes.addFlashAttribute("message","您没有访问该系统的权限");
             return "redirect:/";
         }
     }

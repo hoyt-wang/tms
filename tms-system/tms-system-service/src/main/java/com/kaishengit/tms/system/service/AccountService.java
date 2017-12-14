@@ -1,4 +1,4 @@
-package com.kaishengit.tms.service;
+package com.kaishengit.tms.system.service;
 
 import com.kaishengit.tms.entity.Account;
 import com.kaishengit.tms.entity.Role;

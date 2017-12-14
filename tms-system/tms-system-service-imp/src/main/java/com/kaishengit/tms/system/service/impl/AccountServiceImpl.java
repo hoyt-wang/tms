@@ -1,4 +1,4 @@
-package com.kaishengit.tms.service.impl;
+package com.kaishengit.tms.system.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.kaishengit.tms.entity.Account;
@@ -8,7 +8,7 @@ import com.kaishengit.tms.entity.Role;
 import com.kaishengit.tms.mapper.AccountLoginLogMapper;
 import com.kaishengit.tms.mapper.AccountMapper;
 import com.kaishengit.tms.mapper.AccountRoleMapper;
-import com.kaishengit.tms.service.AccountService;
+import com.kaishengit.tms.system.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
