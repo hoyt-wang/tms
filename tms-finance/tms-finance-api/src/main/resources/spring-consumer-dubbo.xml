@@ -4,7 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <dubbo:application name="tms-system-api"/>
+    <dubbo:application name="tms-finance-api"/>
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
     <dubbo:reference interface="com.kaishengit.tms.service.AccountService" id="accountService" version="1.0"/>

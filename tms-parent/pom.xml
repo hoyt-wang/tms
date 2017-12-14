@@ -11,6 +11,7 @@
         <module>../tms-finance</module>
         <module>../tms-system</module>
         <module>../tms-common</module>
+        <module>../tms-storage</module>
     </modules>
     <packaging>pom</packaging>
 

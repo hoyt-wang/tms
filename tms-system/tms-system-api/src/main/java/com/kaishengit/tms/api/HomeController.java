@@ -35,7 +35,7 @@ public class HomeController {
     public String index() {
         Subject subject = SecurityUtils.getSubject();
 
-       if(subject.isAuthenticated()) {
+        if(subject.isAuthenticated()) {
             //认为用户是要切换账号
             subject.logout();
         }

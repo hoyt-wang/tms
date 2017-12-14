@@ -68,6 +68,7 @@ public class HomeController {
                 //获取登录前访问的URL
                 url = savedRequest.getRequestUrl();
             }
+            subject.checkRole("财务部");
             //登录成功，记录日志
             String ip = request.getRemoteAddr();
             accountService.saveLoginLog((Account)subject.getPrincipal(),ip);

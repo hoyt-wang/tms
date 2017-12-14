@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tms-system-api</artifactId>
+    <artifactId>tms-finance-api</artifactId>
     <packaging>war</packaging>
 
     <dependencies>
@@ -120,7 +120,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <port>8081</port>
+                    <port>8082</port>
                     <path>/</path>
                     <uriEncoding>UTF-8</uriEncoding>
                 </configuration>

@@ -6,7 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!--开启自动扫描，将@Controller注解的Bean放入Spring容器-->
-    <context:component-scan base-package="com.kaishengit.tms.system.api"/>
+    <context:component-scan base-package="com.kaishengit.tms.api"/>
 
     <!---->
     <mvc:annotation-driven/>
