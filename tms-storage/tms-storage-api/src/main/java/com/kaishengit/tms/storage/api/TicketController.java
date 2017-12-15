@@ -32,9 +32,9 @@ public class TicketController {
     }
 
     @PostMapping("/new")
-    public String saveTicket(Ticket ticket, Integer cardNum ,RedirectAttributes redirectAttributes) {
+    public String saveTicket(Ticket ticket, Integer cardNum ,String invalidCards,RedirectAttributes redirectAttributes) {
        try{
-           ticketService.saveTicket(ticket,cardNum);
+           ticketService.saveTicket(ticket,cardNum,invalidCards);
            redirectAttributes.addFlashAttribute("message","年票入库成功");
            return "redirect:/ticket/home";
        } catch (ServiceException e) {
@@ -49,9 +49,9 @@ public class TicketController {
      * @return
      */
     @GetMapping("/out")
-    public String outTicket(Integer ticketNum,Integer cardNum,RedirectAttributes redirectAttributes,Integer storeAccountId) {
+    public String outTicket(Integer cardNum,String invalidCards,RedirectAttributes redirectAttributes,Integer storeAccountId) {
         try {
-            ticketService.outTicket(ticketNum,cardNum,storeAccountId);
+            ticketService.outTicket(cardNum,storeAccountId,invalidCards);
             redirectAttributes.addFlashAttribute("message","年票下发成功");
             return "redirect:/ticket/home";
         } catch(ServiceException e) {
@@ -62,9 +62,15 @@ public class TicketController {
 
     }
 
-    @GetMapping("/{id:\\d+}/invalid")
-    public String invalidTicket(@PathVariable Integer id,RedirectAttributes redirectAttributes) {
-        ticketService.invalidTicket(id);
+    /**
+     * 年票作废
+     * @param ticketNum
+     * @param redirectAttributes
+     * @return
+     */
+    @GetMapping("/invalid")
+    public String invalidTicket(Integer ticketNum,RedirectAttributes redirectAttributes) {
+        ticketService.invalidTicket(ticketNum);
         redirectAttributes.addFlashAttribute("message","年票作废成功");
         return "redirect:/ticket/home";
     }

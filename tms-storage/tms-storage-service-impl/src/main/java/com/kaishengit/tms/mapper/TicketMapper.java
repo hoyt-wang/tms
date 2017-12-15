@@ -30,4 +30,6 @@ public interface TicketMapper {
     int updateByPrimaryKey(Ticket record);
 
     Ticket findByTicketNum(@Param("ticketNum") Integer ticketNum);
+
+    List<Ticket> findByTicketStateAndCarNum(@Param("cardNum") Integer cardNum);
 }

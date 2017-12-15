@@ -12,6 +12,8 @@
         <module>../tms-system</module>
         <module>../tms-common</module>
         <module>../tms-storage</module>
+        <module>../tms-scenic</module>
+        <module>../tms-ticket-store</module>
     </modules>
     <packaging>pom</packaging>
 

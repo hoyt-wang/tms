@@ -198,6 +198,15 @@
   <select id="findByTicketNum" resultType="com.kaishengit.tms.entity.Ticket">
     SELECT * FROM ticket where ticket_num = #{ticketNum}
   </select>
+  <select id="findByTicketStateAndCarNum" resultType="com.kaishengit.tms.entity.Ticket">
+    SELECT
+	*
+    FROM
+        ticket
+    WHERE
+        ticket_state = '入库'
+    LIMIT #{cardNum}
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update ticket
     <set>

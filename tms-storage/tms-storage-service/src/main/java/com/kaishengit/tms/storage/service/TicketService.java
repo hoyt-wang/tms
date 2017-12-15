@@ -12,19 +12,18 @@ public interface TicketService {
      * 年票入库
      * @param ticket
      */
-    void saveTicket(Ticket ticket,Integer cardNum);
+    void saveTicket(Ticket ticket,Integer cardNum,String invalidCards);
 
     /**
      * 年票下发
-     * @param ticketNum
      * @param cardNum
      * @param storeAccountId
      */
-    void outTicket(Integer ticketNum, Integer cardNum,Integer storeAccountId);
+    void outTicket(Integer cardNum,Integer storeAccountId,String invalidCards);
 
     /**
      * 年票作废
-     * @param id
+     * @param ticketNum
      */
-    void invalidTicket(Integer id);
+    void invalidTicket(Integer ticketNum);
 }

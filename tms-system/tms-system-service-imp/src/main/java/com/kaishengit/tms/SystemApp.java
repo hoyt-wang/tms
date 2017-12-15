@@ -9,9 +9,9 @@ import java.io.IOException;
 /**
  * @author fankay
  */
-public class App {
+public class SystemApp {
 
-    private static Logger logger = LoggerFactory.getLogger(App.class);
+    private static Logger logger = LoggerFactory.getLogger(SystemApp.class);
 
     public static void main(String[] args) throws IOException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:spring-context.xml");
