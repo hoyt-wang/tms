@@ -2,7 +2,7 @@ package com.kaishengit.tms.storage.api;
 
 import com.kaishengit.tms.entity.Ticket;
 import com.kaishengit.tms.exception.ServiceException;
-import com.kaishengit.tms.storage.service.TicketService;
+import com.kaishengit.tms.system.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

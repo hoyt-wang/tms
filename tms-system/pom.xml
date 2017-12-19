@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>tms-system-service</module>
-        <module>tms-system-service-imp</module>
+        <module>tms-system-service-impl</module>
         <module>tms-system-api</module>
     </modules>
 

@@ -31,4 +31,13 @@ public interface AccountService {
      * @param ip
      */
     void saveLoginLog(Account account, String ip);
+
+    /**
+     * 更改账户密码
+     * @param account
+     * @param password
+     * @param newPassword
+     * @param confirmPassword
+     */
+    void updatePassword(Account account, String password, String newPassword, String confirmPassword);
 }

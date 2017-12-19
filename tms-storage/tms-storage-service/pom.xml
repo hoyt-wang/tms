@@ -11,5 +11,5 @@
 
     <artifactId>tms-storage-service</artifactId>
 
-
+    <packaging>jar</packaging>
 </project>
