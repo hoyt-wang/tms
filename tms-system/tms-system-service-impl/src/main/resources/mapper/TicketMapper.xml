@@ -116,7 +116,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{storeAccountId,jdbcType=INTEGER}, #{ticketValidatyStart,jdbcType=TIMESTAMP}, 
       #{ticketValidatyEnd,jdbcType=TIMESTAMP}, #{customerId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.kaishengit.tms.entity.Ticket" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="com.kaishengit.tms.entity.Ticket" >
     insert into ticket
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -207,7 +207,33 @@
         ticket_state = '入库'
     LIMIT #{cardNum}
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="findLastTicketNum" resultType="java.lang.Integer">
+        SELECT
+            ticket_num
+        FROM
+            ticket
+        ORDER BY
+            id DESC
+        LIMIT 1
+    </select>
+  <select id="findByTicketState" resultType="com.kaishengit.tms.entity.Ticket">
+      SELECT
+      *
+      FROM
+          ticket
+      WHERE
+          ticket_state = '入库'
+  </select>
+    <select id="findAllTicketState" resultType="java.lang.String">
+      SELECT
+      DISTINCT (ticket_state)
+      FROM
+          ticket
+    </select>
+    <select id="countByTicketState" resultType="java.lang.Long">
+        SELECT count(*) from ticket where ticket_state = #{ticketState}
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update ticket
     <set>
       <if test="record.id != null">

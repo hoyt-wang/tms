@@ -11,10 +11,11 @@
 
     <!--自动扫描@service注解-->
     <dubbo:annotation package="com.kaishengit.tms.system.service.impl"/>
+    <dubbo:service interface="com.kaishengit.tms.system.service.TicketService" ref="ticketServiceImpl"/>
 
-  <!--  <dubbo:service interface="com.kaishengit.tms.system.service.TicketService" ref="ticketService"/>
-    <dubbo:service interface="com.kaishengit.tms.system.service.AccountService" ref="accountService"/>
-    <dubbo:service interface="com.kaishengit.tms.system.service.ScenicService" ref="scenicService"/>
-    <dubbo:service interface="com.kaishengit.tms.system.service.ScenicAccountService" ref="scenicAccountService"/>-->
+    <!--<dubbo:service interface="com.kaishengit.tms.system.service.TicketService" ref="ticketServiceImpl"/>
+    <dubbo:service interface="com.kaishengit.tms.system.service.AccountService" ref="accountServiceImpl"/>
+    <dubbo:service interface="com.kaishengit.tms.system.service.ScenicService" ref="scenicServiceImpl"/>
+    <dubbo:service interface="com.kaishengit.tms.system.service.ScenicAccountService" ref="scenicAccountServiceImpl"/>-->
 
 </beans>

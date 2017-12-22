@@ -6,64 +6,39 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
 
-        <!-- 搜索表单，不需要删除即可 -->
-        <!--<form action="#" method="get" class="sidebar-form">
-          <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                  </button>
-                </span>
-          </div>
-        </form>-->
-        <!-- /.search form -->
         <!-- 菜单 -->
         <ul class="sidebar-menu">
             <li class="${param.menu == 'home' ? 'active' : ''}"><a href="/home"><i
                     class="fa fa-home"></i> <span>首页</span></a></li>
-            <li class="header">系统功能</li>
+            <li class="header">库存管理系统</li>
             <!-- 客户管理 -->
-            <li class="treeview ${fn:startsWith(param.menu, 'customer_') ? 'active' : ''}">
-                <a href="#">
-                    <i class="fa fa-address-book-o"></i> <span>客户管理</span>
+            <li class="${fn:startsWith(param.menu, 'new') ? 'active' : ''}">
+                <a href="/ticket/new">
+                    <i class="fa fa-address-book-o"></i> <span>年票入库</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="${param.menu == 'customer_my' ? 'active' : ''}"><a href="/customer/my"><i class="fa fa-circle-o"></i> 我的客户</a></li>
-                    <li class="${param.menu == 'customer_public' ? 'active' : ''}"><a href="/customer/public"><i class="fa fa-circle-o"></i> 公海客户</a></li>
-                </ul>
             </li>
             <!-- 工作记录 -->
-            <li class="treeview ${fn:startsWith(param.menu, 'sales_') ? 'active' : ''}">
-                <a href="#">
-                    <i class="fa fa-bars"></i> <span>销售机会</span>
+            <li class="treeview ${fn:startsWith(param.menu, 'out') ? 'active' : ''}">
+                <a href="/ticket/out">
+                    <i class="fa fa-bars"></i> <span>年票下发</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="${param.menu == 'sales_my' ? 'active' : ''}"><a href="/sales/my"><i class="fa fa-circle-o"></i> 我的机会</a></li>
-                </ul>
             </li>
             <!-- 待办事项 -->
-            <li class="${param.menu == 'task' ? 'active' : ''}"><a href="/task"><i class="fa fa-calendar"></i> <span>待办事项</span></a></li>
+            <li class="${param.menu == 'in' ? 'active' : ''}"><a href="/ticket/invalid"><i class="fa fa-calendar"></i> <span>年票作废</span></a></li>
             <!-- 统计报表 -->
-            <li class="treeview ${fn:startsWith(param.menu, 'charts_') ? 'active' : ''}">
-                <a href="#">
-                    <i class="fa fa-pie-chart"></i> <span>统计报表</span>
+            <li class="treeview ${fn:startsWith(param.menu, 'list') ? 'active' : ''}">
+                <a href="/ticket/list">
+                    <i class="fa fa-pie-chart"></i> <span>盘点统计</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="${param.menu == 'charts_demo' ? 'active' : ''}"><a href="/charts/demo"><i class="fa fa-circle-o"></i> 静态演示</a></li>
-                    <li class="${param.menu == 'charts_customer' ? 'active' : ''}"><a href="/charts"><i class="fa fa-circle-o"></i> 客户统计</a></li>
-                </ul>
             </li>
-
-
-            <li class="${param.menu == 'disk' ? 'active' : ''}"><a href="/disk"><i class="fa fa-share-alt"></i> <span>公司网盘</span></a></li>
 
                 <li class="header">系统管理</li>
                 <!-- 部门员工管理 -->
                 <li class="${param.menu == 'employee' ? 'active' : ''}"><a href="/employee"><i class="fa fa-users"></i>
-                    <span>员工管理</span></a>
+                    <span>系统管理入口</span></a>
                 </li>
             <!--<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>-->

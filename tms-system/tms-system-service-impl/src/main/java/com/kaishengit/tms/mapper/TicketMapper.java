@@ -32,4 +32,13 @@ public interface TicketMapper {
     Ticket findByTicketNum(@Param("ticketNum") Integer ticketNum);
 
     List<Ticket> findByTicketStateAndCarNum(@Param("cardNum") Integer cardNum);
+
+    int findLastTicketNum();
+
+    List<Ticket> findByTicketState();
+
+    List<String> findAllTicketState();
+
+    Long countByTicketState(@Param("ticketState") String ticketState);
+
 }

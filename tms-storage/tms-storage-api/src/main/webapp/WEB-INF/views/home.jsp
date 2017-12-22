@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -43,15 +44,13 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Title</h3>
 
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="fa fa-minus"></i></button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                            <i class="fa fa-times"></i></button>
-                    </div>
+
                 </div>
                 <div class="box-body">
-
+                    <c:if test="${not empty message}">
+                        ${message}
+                    </c:if>
+                    <label>库存</label>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
