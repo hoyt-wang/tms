@@ -19,6 +19,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by hoyt on 2017/12/24.
+ */
 @Component
 public class ShiroRealm extends AuthorizingRealm {
 

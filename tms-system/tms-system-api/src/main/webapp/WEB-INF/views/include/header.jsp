@@ -7,7 +7,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>TMS</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>T</b>MS</span>
+        <span class="logo-lg"><b>凯盛</b> TMS</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -40,10 +40,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">个人设置</a>
+                                <a href="/profile" class="btn btn-default btn-flat">个人设置</a>
                             </div>
                             <div class="pull-right">
-                                <a href="/logout" class="btn btn-default btn-flat">安全退出</a>
+                                <a href="/exit" class="btn btn-default btn-flat">安全退出</a>
                             </div>
                         </li>
                     </ul>

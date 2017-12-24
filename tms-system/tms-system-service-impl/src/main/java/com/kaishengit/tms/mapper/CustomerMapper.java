@@ -30,5 +30,5 @@ public interface CustomerMapper {
 
     void updateAge();
 
-
+    Customer getCustomerByIdCard(@Param("customerIdCard") String customerIdCard);
 }

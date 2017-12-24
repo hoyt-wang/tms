@@ -1,13 +1,12 @@
 package com.kaishengit.tms.system.service.impl;
 
-import com.kaishengit.tms.entity.Customer;
-import com.kaishengit.tms.entity.Ticket;
-import com.kaishengit.tms.entity.TicketConsumer;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.kaishengit.tms.entity.*;
 import com.kaishengit.tms.exception.ServiceException;
-import com.kaishengit.tms.mapper.CustomerMapper;
-import com.kaishengit.tms.mapper.TicketConsumerMapper;
-import com.kaishengit.tms.mapper.TicketMapper;
+import com.kaishengit.tms.mapper.*;
 import com.kaishengit.tms.system.service.ScenicService;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -20,6 +19,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,6 +29,12 @@ import java.util.UUID;
 public class ScenicServiceImpl implements ScenicService {
 
     private static Logger logger = LoggerFactory.getLogger(ScenicAccountServiceImpl.class);
+
+    @Autowired
+    private ScenicMapper scenicMapper;
+
+    @Autowired
+    private ScenicAccountMapper scenicAccountMapper;
 
 
     @Autowired
@@ -42,6 +48,51 @@ public class ScenicServiceImpl implements ScenicService {
 
     @Autowired
     private CustomerMapper customerMapper;
+
+    @Override
+    public PageInfo<Scenic> findAllByPageNo(Integer pageNo) {
+        PageHelper.startPage(pageNo,10);
+        ScenicExample scenicExample = new ScenicExample();
+        List<Scenic> scenicList = scenicMapper.selectByExample(scenicExample);
+        return new PageInfo<>(scenicList);
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public ScenicAccount newScenic(Scenic scenic) {
+        //添加景区信息
+        scenic.setCreateTime(new Date());
+        scenicMapper.insert(scenic);
+        //新增景区账号
+        ScenicAccount scenicAccount = new ScenicAccount();
+        scenicAccount.setCreateTime(new Date());
+        scenicAccount.setScenicAccount(scenic.getScenicTel());
+        scenicAccount.setScenicId(scenic.getId());
+        String password = new Md5Hash("123").toString();
+        scenicAccount.setScenicPassword(password);
+        scenicAccount.setScenicState("正常营业");
+        scenicAccountMapper.insert(scenicAccount);
+        //景区添加scenicId
+        scenic.setScenicAccountId(scenicAccount.getId());
+        scenicMapper.updateByPrimaryKey(scenic);
+
+        logger.info("添加新景区{},景区id为",scenic.getScenicName(),scenicAccount.getId());
+        return scenicAccount;
+    }
+
+    @Override
+    public Scenic findById(Integer scenicId) {
+
+        Scenic scenic = scenicMapper.selectByPrimaryKey(scenicId);
+        return scenic;
+    }
+
+    @Override
+    public void edit(Scenic scenic) {
+        scenic.setUpdateTime(new Date());
+        scenicMapper.updateByPrimaryKeyWithBLOBs(scenic);
+        logger.info("修改景区{}状态",scenic.getScenicName());
+    }
 
     /**
      * 刷卡信息校验
