@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TMS-景区管理系统 | 首页</title>
+    <title>TMS-景区管理系统 | 持卡人信息</title>
     <%@include file="include/css.jsp"%>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -15,27 +15,13 @@
 
     <%@include file="include/header.jsp"%>
     <!-- =============================================== -->
-
     <jsp:include page="include/sider.jsp">
         <jsp:param name="menu" value="home"/>
     </jsp:include>
-
     <!-- =============================================== -->
 
     <!-- 右侧内容部分 -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Blank page
-                <small>it all starts here</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Examples</a></li>
-                <li class="active">Blank page</li>
-            </ol>
-        </section>
 
         <!-- Main content -->
         <section class="content">
@@ -43,17 +29,32 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-body">
-                    <c:if test="${not empty message}">
-                        ${message}
-                    </c:if>
-                    <div id="countModal">
 
-                            <label>今日客流量: 共计${not empty countCustomer ? countCustomer : 0}人</label>
-
+                    <div>
+                        <div class="box-header with-border">
+                            <h3>
+                                <c:if test="${not empty message}">
+                                    ${message}
+                                </c:if>
+                            </h3>
+                            <h3 class="box-title">持卡人信息</h3>
+                        </div>
+                        <div class="box-body no-padding">
+                            <table class="table">
+                                <tr>
+                                    <td class="td_title">姓名</td>
+                                    <td>${customer.customerName}</td>
+                                    <td class="td_title">性别</td>
+                                    <td>${customer.customerPhoto}</td>
+                                    <td class="td_title">照片</td>
+                                    <td>${customer.customerGender}</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
 
-
                 </div>
+
             </div>
             <!-- /.box -->
 

@@ -4,6 +4,7 @@ package com.kaishengit.tms.scenic.api;
 import com.kaishengit.tms.entity.ScenicAccount;
 import com.kaishengit.tms.result.AjaxResult;
 import com.kaishengit.tms.system.service.ScenicAccountService;
+import com.kaishengit.tms.system.service.ScenicService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -33,6 +34,8 @@ public class HomeController {
     @Autowired
     private ScenicAccountService scenicAccountService;
 
+    @Autowired
+    private ScenicService scenicService;
 
     /**
      * 去登录页面
@@ -105,13 +108,30 @@ public class HomeController {
         return "redirect:/";
     }
 
-    /**
+ /*   *//**
      * 去登录后的页面
      * @return
-     */
+     *//*
     @GetMapping("/home")
     public String home() {
         return "home";
+    }
+*/
+    /**
+     *
+     * @param model
+     * @return
+     */
+    @GetMapping("/home")
+    public String countCustomer(Model model) {
+        Subject subject = SecurityUtils.getSubject();
+        ScenicAccount scenicAccount = (ScenicAccount) subject.getPrincipal();
+        //统计客流量
+        Long countCustomer = scenicService.countByRedisPool(scenicAccount.getId());
+        System.out.println("流量：" + countCustomer);
+        model.addAttribute("countCustomer",countCustomer);
+        return "home";
+
     }
 
     /**
@@ -141,5 +161,16 @@ public class HomeController {
         }
 
     }
+
+    /**
+     * 持卡人信息
+     * @return
+     */
+    @GetMapping("/customer")
+    public String customerDetail() {
+        return "customer";
+    }
+
+
 
 }

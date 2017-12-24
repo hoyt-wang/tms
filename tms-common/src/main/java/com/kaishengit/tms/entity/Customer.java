@@ -154,4 +154,23 @@ public class Customer implements Serializable {
     public void setCustomerGender(String customerGender) {
         this.customerGender = customerGender;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", customerName='" + customerName + '\'' +
+                ", customerIdCard='" + customerIdCard + '\'' +
+                ", customerIdCardPhoto='" + customerIdCardPhoto + '\'' +
+                ", customerIdCardPhotoBack='" + customerIdCardPhotoBack + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", customerPhoto='" + customerPhoto + '\'' +
+                ", customerTel='" + customerTel + '\'' +
+                ", cutomerAddress='" + cutomerAddress + '\'' +
+                ", ticketId=" + ticketId +
+                ", customerAge=" + customerAge +
+                ", customerGender='" + customerGender + '\'' +
+                '}';
+    }
 }

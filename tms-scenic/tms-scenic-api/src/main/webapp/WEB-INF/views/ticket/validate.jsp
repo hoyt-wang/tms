@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,7 @@
 
     <!-- 右侧内容部分 -->
     <div class="content-wrapper">
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -32,7 +34,9 @@
 
         <!-- Main content -->
         <section class="content">
-
+            <c:if test="${not empty message}">
+                ${message}
+            </c:if>
             <div class="box">
                 <div class="box-body">
                     <form action="/ticket/validate" method="post" id="validateForm">
