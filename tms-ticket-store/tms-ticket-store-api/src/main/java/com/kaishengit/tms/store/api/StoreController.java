@@ -35,6 +35,12 @@ public class StoreController {
         return "store/home";
     }
 
+    /**
+     * 详情页
+     * @param ticketNum
+     * @param model
+     * @return
+     */
     @PostMapping("/detail")
     public String detail(Integer ticketNum, Model model) {
         Ticket ticket = storeService.findByTicketNum(ticketNum);
@@ -42,6 +48,10 @@ public class StoreController {
         return "store/home";
     }
 
+    /**
+     * 年票办理
+     * @return
+     */
     @GetMapping("/handle")
     public String handle() {
         return "store/handle";
@@ -93,6 +103,10 @@ public class StoreController {
         }
     }
 
+    /**
+     * 续费
+     * @return
+     */
     @GetMapping("/payment")
     public String payment() {
         return "store/payment";
@@ -106,6 +120,10 @@ public class StoreController {
         return "redirect:/store/";
     }
 
+    /**
+     * 挂失
+     * @return
+     */
     @GetMapping("/guashi")
     public String reportLoss() {
         return "store/guashi";
@@ -125,6 +143,10 @@ public class StoreController {
         }
     }
 
+    /**
+     * 解挂
+     * @return
+     */
     @GetMapping("/restore")
     public String restore() {
         return "store/restore";
@@ -145,6 +167,10 @@ public class StoreController {
 
     }
 
+    /**
+     * 补卡
+     * @return
+     */
     @GetMapping("/replace")
     public String replace() {
         return "store/replace";

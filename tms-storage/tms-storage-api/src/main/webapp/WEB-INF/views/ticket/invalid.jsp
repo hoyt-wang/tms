@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -39,12 +40,16 @@
         <section class="content">
 
                 <div class="box-body">
-                    <form   id="invalidForm">
+                    <form action="/ticket/invalid" method="post" id="invalidForm">
                         <div class="form-group">
                             <label>请输入作废卡号</label>
                             <input type="number" name="ticketNum" class="form-control"  placeholder="请输入作废卡号">
                         </div>
-
+                        <div class="form-group" id="exceptionMsg">
+                            <c:if test="${not empty message}">
+                                ${message}
+                            </c:if>
+                        </div>
                         <div class="form-group">
                             <button class="btn btn-primary" id="invalidBtn">作废</button>
                         </div>
@@ -72,7 +77,7 @@
         $("#invalidBtn").click(function () {
             $("#invalidForm").submit();
         });
-        $("#invalidForm").validate({
+  /*      $("#invalidForm").validate({
             errorClass:"text-danger",
             errorElement:"span",
             rules:{
@@ -88,16 +93,18 @@
             submitHandler:function(){
                 $.post("/ticket/invalid",$("#invalidForm").serialize()).done(function (data) {
                     if(data.state == 'success') {
-                        layer.msg("该年票已作废");
                         window.location.href = "/home";
                     } else {
-                        layer.msg(data.message);
+                        var exceptionMsg = data.message;
+                        var html = '<span>'+exceptionMsg+'</span>';
+                        $("#exceptionMsg").append(html);
+                        alert(data.msg);
                     }
                 }).error(function () {
                     layer.msg("服务器忙，请稍后");
                 });
             }
-        });
+        });*/
     });
 </script>
 </body>

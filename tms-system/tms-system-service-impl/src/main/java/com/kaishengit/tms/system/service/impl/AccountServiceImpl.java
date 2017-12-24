@@ -1,6 +1,5 @@
 package com.kaishengit.tms.system.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kaishengit.tms.entity.*;
@@ -11,6 +10,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -20,7 +20,7 @@ import java.util.List;
  * Created by hoyt on 2017/12/13.
  */
 
-@Service(version = "1.0",timeout = 5000)
+@Service
 public class AccountServiceImpl implements AccountService{
 
     private static Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
@@ -93,7 +93,7 @@ public class AccountServiceImpl implements AccountService{
      * @param confirmPassword
      */
     @Override
-    public void updatePassword(Account account, String password, String newPassword, String confirmPassword) {
+    public void updatePassword(Account account, String password, String newPassword, String confirmPassword) throws ServiceException{
         String oldPwd = account.getAccountPassword();
         String md5Pwd = DigestUtils.md5Hex(password);
         if (md5Pwd.equals(oldPwd)) {
@@ -124,10 +124,18 @@ public class AccountServiceImpl implements AccountService{
         if (accountList != null && !accountList.isEmpty()) {
             throw new ServiceException("该账号已存在");
         }
-
+        //获取roleList
+        List<Role> roleList = null;
+        for (Integer id : roleId) {
+            Role role = roleMapper.selectByPrimaryKey(id);
+            roleList.add(role);
+        }
         //添加账户
         account.setCreateTime(new Date());
         account.setAccountState("正常");
+        String md5Pwd = DigestUtils.md5Hex(account.getAccountPassword());
+        account.setAccountPassword(md5Pwd);
+        account.setRoleList(roleList);
         accountMapper.insert(account);
         //添加角色
         for (Integer id : roleId) {
@@ -214,6 +222,34 @@ public class AccountServiceImpl implements AccountService{
         storeAccountExample.createCriteria().andStoreAccountEqualTo(userName);
         List<StoreAccount> storeAccounts = storeAccountMapper.selectByExample(storeAccountExample);
         return storeAccounts.get(0);
+    }
+
+    /**
+     * 更改密码
+     *
+     * @param account
+     * @param password
+     * @param newPassword
+     * @param confirmPassword
+     */
+    @Override
+    public void changePassword(Account account, String password, String newPassword, String confirmPassword) {
+        String oldpwd = account.getAccountPassword();
+        String md5Pwd = DigestUtils.md5Hex(password);
+        if(md5Pwd.equals(oldpwd)){ //输入的旧密码与原密码一致
+            if(newPassword.equals(confirmPassword)){//判断输入的两个新密码是否一致
+                if(!(DigestUtils.md5Hex(newPassword).equals(oldpwd))){//如果新密码与原密码不同，执行更新密码操作
+                    account.setAccountPassword(DigestUtils.md5Hex( newPassword));
+                    accountMapper.updateByPrimaryKey(account);
+                }else if(DigestUtils.md5Hex(newPassword).equals(oldpwd)){
+                    throw new ServiceException("密码没有改动");
+                }
+            }else{//抛出异常
+                throw new ServiceException("抱歉，密码输入不一致");
+            }
+        }else{//抛出异常
+            throw new ServiceException("旧密码输入错误");
+        }
     }
 
 

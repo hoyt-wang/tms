@@ -14,4 +14,13 @@ public interface StoreAccountService {
      * @return
      */
     List<StoreAccount> findAll();
+
+    /**
+     * 更改密码
+     * @param storeAccount
+     * @param password
+     * @param newPassword
+     * @param confirmPassword
+     */
+    void updatePassword(StoreAccount storeAccount, String password, String newPassword, String confirmPassword);
 }

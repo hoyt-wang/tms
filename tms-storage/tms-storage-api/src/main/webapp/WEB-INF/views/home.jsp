@@ -47,10 +47,12 @@
 
                 </div>
                 <div class="box-body">
-                    <c:if test="${not empty message}">
-                        ${message}
-                    </c:if>
-                    <label>库存</label>
+                    <h3>
+                        <c:if test="${not empty message}">
+                            ${message}
+                        </c:if>
+                    </h3>
+
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">

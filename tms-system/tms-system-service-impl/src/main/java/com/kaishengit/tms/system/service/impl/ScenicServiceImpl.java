@@ -100,7 +100,7 @@ public class ScenicServiceImpl implements ScenicService {
      */
     @Override
     @Transactional
-    public Customer validateTicket(Integer ticketNum, Integer scenicAccountId) {
+    public Customer validateTicket(Integer ticketNum, Integer scenicAccountId) throws ServiceException{
 
         Ticket ticket = ticketMapper.findByTicketNum(ticketNum);
         if(ticket != null ) {

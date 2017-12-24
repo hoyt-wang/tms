@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>凯盛 TMS-新增用户</title>
+    <title>凯盛 TMS-新增账号</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <%@include file="../include/css.jsp"%>
@@ -32,7 +32,7 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">新增客户</h3>
+                    <h3 class="box-title">新增账号</h3>
                     <div class="box-tools pull-right">
                         <a href="/account/list" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left"></i>返回列表</a>
                     </div>

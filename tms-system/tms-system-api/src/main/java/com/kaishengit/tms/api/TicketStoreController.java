@@ -26,6 +26,12 @@ public class TicketStoreController {
     private TicketStoreService ticketStoreService;
 
 
+    /**
+     * 获取售票点列表
+     * @param pageNo
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String list(@RequestParam(name = "p",required = false,defaultValue = "1") Integer pageNo,
                        Model model) {
@@ -86,6 +92,12 @@ public class TicketStoreController {
         return "redirect:/ticket/";
     }
 
+    /**
+     * 编辑售票点信息
+     * @param ticketStoreId
+     * @param model
+     * @return
+     */
     @GetMapping("/edit/{id:\\d+}")
     public String editTicketStore(@PathVariable(name = "id",required = false) Integer ticketStoreId,Model model) {
 

@@ -71,7 +71,7 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public void outTicket(Integer cardNum,Integer storeAccountId,String invalidCards) {
+    public void outTicket(Integer cardNum,Integer storeAccountId,String invalidCards) throws ServiceException{
 
             int invalidNum = 0;
             if(StringUtils.isNotEmpty(invalidCards)) {
@@ -111,14 +111,19 @@ public class TicketServiceImpl implements TicketService {
      * @param ticketNum
      */
     @Override
-    public void invalidTicket(Integer ticketNum) {
+    public void invalidTicket(Integer ticketNum) throws ServiceException{
         Ticket ticket = ticketMapper.findByTicketNum(ticketNum);
         if (ticket != null) {
-            //年票状态 0未激活  1激活  2入库  3下发  4作废
-            ticket.setTicketState("作废");
-            ticket.setUpdateTime(new Date());
-            ticketMapper.updateByPrimaryKey(ticket);
-            logger.info("年票{}已作废",ticket.getTicketNum());
+            if (!ticket.getTicketState().equals("作废")) {
+                //年票状态 0未激活  1激活  2入库  3下发  4作废
+                ticket.setTicketState("作废");
+                ticket.setUpdateTime(new Date());
+                ticketMapper.updateByPrimaryKey(ticket);
+                logger.info("年票{}已作废",ticket.getTicketNum());
+            } else {
+                throw new ServiceException("该年票已作废");
+            }
+
         } else {
             throw new ServiceException("无法找到对应的年票，请重新输入卡号");
         }

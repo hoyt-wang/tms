@@ -13,7 +13,6 @@
     <packaging>war</packaging>
 
     <dependencies>
-
         <dependency>
             <groupId>com.kaishengit</groupId>
             <artifactId>tms-common</artifactId>

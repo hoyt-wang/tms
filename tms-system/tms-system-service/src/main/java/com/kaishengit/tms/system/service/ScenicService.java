@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.kaishengit.tms.entity.Customer;
 import com.kaishengit.tms.entity.Scenic;
 import com.kaishengit.tms.entity.ScenicAccount;
+import com.kaishengit.tms.exception.ServiceException;
 
 /**
  * Created by hoyt on 2017/12/18.
@@ -44,7 +45,7 @@ public interface ScenicService {
      * 验证年票是否有效
      * @param ticketNum
      */
-    Customer validateTicket(Integer ticketNum, Integer scenicAccountId);
+    Customer validateTicket(Integer ticketNum, Integer scenicAccountId) throws ServiceException;
 
     /**
      * 从redis中统计今日客流量

@@ -1,6 +1,7 @@
 package com.kaishengit.tms.system.service;
 
 import com.kaishengit.tms.entity.Ticket;
+import com.kaishengit.tms.exception.ServiceException;
 
 import java.util.List;
 
@@ -21,13 +22,13 @@ public interface TicketService {
      * @param cardNum
      * @param storeAccountId
      */
-    void outTicket(Integer cardNum, Integer storeAccountId, String invalidCards);
+    void outTicket(Integer cardNum, Integer storeAccountId, String invalidCards) throws ServiceException;
 
     /**
      * 年票作废
      * @param ticketNum
      */
-    void invalidTicket(Integer ticketNum);
+    void invalidTicket(Integer ticketNum) throws ServiceException;
 
     /**
      * 获取最后入库年票卡号

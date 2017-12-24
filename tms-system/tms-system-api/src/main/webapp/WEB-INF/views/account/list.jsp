@@ -51,6 +51,7 @@
                             <th>用户名</th>
                             <th>创建时间</th>
                             <th>状态</th>
+                            <th>拥有权限</th>
                             <th>联系方式</th>
                             <th>操作</th>
                         </tr>
@@ -64,6 +65,9 @@
                                 <td>${account.accountName}</td>
                                 <td><fmt:formatDate value="${account.createTime}"/></td>
                                 <td class="star">${account.accountState}</td>
+                                <td>
+                                    ${account.roleList}
+                                </td>
                                 <td><i class="fa fa-phone"></i> ${account.accountMobile} <br></td>
                                 <td><a href="/account/delete/${account.id}">删除</a> <a href="/account/update/${account.id}">修改</a></td>
                             </tr>

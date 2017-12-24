@@ -27,6 +27,12 @@ public class ScenicController {
     private ScenicService scenicService;
 
 
+    /**
+     * 获取景区信息列表
+     * @param pageNo
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String list(@RequestParam(name = "p",defaultValue = "1",required = false) Integer pageNo,
                        Model model) {
@@ -35,6 +41,11 @@ public class ScenicController {
         model.addAttribute("scenicPageInfo",scenicPageInfo);
         return "scenic/list";
     }
+
+    /**
+     * 新增景区
+     * @return
+     */
     @GetMapping("/new")
     public String newScenic() {
         return "scenic/new";
@@ -64,6 +75,13 @@ public class ScenicController {
         }
         return "redirect:/scenic/";
     }
+
+    /**
+     * 编辑景区信息
+     * @param scenicId
+     * @param model
+     * @return
+     */
     @GetMapping("/edit")
     public String edit(@RequestParam(name = "id") Integer scenicId,Model model) {
         model.addAttribute("scenic",scenicService.findById(scenicId));
@@ -93,6 +111,12 @@ public class ScenicController {
         return "redirect:/scenic/";
     }
 
+    /**
+     * 景区详细信息
+     * @param scenicId
+     * @param model
+     * @return
+     */
     @GetMapping("/detail")
     public String detail(@RequestParam(name = "id") Integer scenicId,Model model) {
         model.addAttribute("scenic",scenicService.findById(scenicId));

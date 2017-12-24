@@ -1,6 +1,7 @@
 package com.kaishengit.tms.api;
 
 import com.kaishengit.tms.entity.Account;
+import com.kaishengit.tms.result.AjaxResult;
 import com.kaishengit.tms.system.service.AccountService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -11,11 +12,14 @@ import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by hoyt on 2017/12/24.
@@ -26,6 +30,10 @@ public class HomeController {
     @Autowired
     private AccountService accountService;
 
+    /**
+     * 登录验证
+     * @return
+     */
     @GetMapping("/")
     public String login() {
 
@@ -64,14 +72,53 @@ public class HomeController {
             return "redirect:/";
         }
     }
+
+    /**
+     * 首页
+     * @return
+     */
     @GetMapping("/home")
     public String home() {
         return "account/home";
     }
+
+    /**安全退出
+     * @param redirectAttributes
+     * @return
+     */
     @GetMapping("/exit")
     public String exit(RedirectAttributes redirectAttributes) {
         SecurityUtils.getSubject().logout();
         redirectAttributes.addFlashAttribute("message","已安全退出");
         return "redirect:/";
+    }
+
+    /**
+     * 更改密码
+     * @return
+     */
+    @GetMapping("/account/profile")
+    public String changePassword(Model model) {
+        Subject subject = SecurityUtils.getSubject();
+        Account account = (Account) subject.getPrincipal();
+        model.addAttribute("account",account);
+        return "account/profile";
+    }
+
+    @PostMapping("/account/profile")
+    @ResponseBody
+    public AjaxResult changePassword(String newPassword, String confirmPassword,
+                                     String password) {
+        Subject subject = SecurityUtils.getSubject();
+        Account account = (Account) subject.getPrincipal();
+        try {
+            accountService.changePassword(account,password,newPassword,confirmPassword);
+            //重新登录
+            subject.logout();
+            return AjaxResult.success();
+        } catch (Exception e) {
+            return AjaxResult.error(e.getMessage());
+        }
+
     }
 }

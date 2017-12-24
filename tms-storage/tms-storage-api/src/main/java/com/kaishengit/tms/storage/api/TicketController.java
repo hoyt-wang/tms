@@ -58,16 +58,18 @@ public class TicketController {
 
     }
 
+    /**
+     * 年票下发
+     * @param model
+     * @return
+     */
     @GetMapping("/out")
     public String outTicket(Model model) {
         List<StoreAccount> storeAccountList = storeAccountService.findAll();
         model.addAttribute("storeAccountList",storeAccountList);
         return "ticket/out";
     }
-    /**
-     * 年票下发
-     * @return
-     */
+
     @PostMapping("/out")
     public String outTicket(Integer cardNum, String invalidCards, RedirectAttributes redirectAttributes, Integer storeAccountId) {
         try {
@@ -96,14 +98,15 @@ public class TicketController {
      * @return
      */
     @PostMapping("/invalid")
-    @ResponseBody
-    public AjaxResult invalidTicket(Integer ticketNum, RedirectAttributes redirectAttributes) {
+    public String invalidTicket(Integer ticketNum, RedirectAttributes redirectAttributes) {
         try {
             ticketService.invalidTicket(ticketNum);
-            return AjaxResult.success();
+            redirectAttributes.addFlashAttribute("message","年票作废成功！");
+            return "ticket/invalid";
         } catch (ServiceException e) {
             e.printStackTrace();
-            return AjaxResult.error(e.getMessage());
+            redirectAttributes.addFlashAttribute("message",e.getMessage());
+            return "ticket/invalid";
         }
 
     }

@@ -39,12 +39,13 @@
                     <li class="${param.menu == 'sale_my'? 'active' : ''}"><a href="/"><i class="fa fa-circle-o"></i> 规章制度</a></li>
                 </ul>
             </li>
-            <!-- 待办事项 -->
+
+            <%--<!-- 待办事项 -->
             <li class="${param.menu == 'task' ? 'active' : ''}"><a href="/"><i class="fa fa-calendar"></i> <span>待办事项</span></a></li>
             <!-- 统计报表 -->
 
             <li class="${param.menu == 'charts_list'? 'active' : ''}"><a href="/"><i class="fa fa-pie-chart"></i><span> 统计报表</span></a></li>
-
+--%>
 
             <shiro:hasRole name="超级管理员">
             <li class="header">系统管理</li>

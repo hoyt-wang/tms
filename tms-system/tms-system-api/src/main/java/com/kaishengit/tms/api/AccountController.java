@@ -31,6 +31,11 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    /**
+     * 新建账号
+     * @param model
+     * @return
+     */
     @GetMapping("/new")
     public String newAccount(Model model) {
         model.addAttribute("roleList",accountService.findAllRole());
@@ -49,6 +54,12 @@ public class AccountController {
         return "redirect:/account/list";
     }
 
+    /**
+     * 删除账号
+     * @param accountId
+     * @param redirectAttributes
+     * @return
+     */
     @GetMapping("/delete/{id:\\d+}")
     public String deleteAccount(@PathVariable(name = "id") Integer accountId,RedirectAttributes redirectAttributes) {
         try {
@@ -59,6 +70,13 @@ public class AccountController {
         }
         return "redirect:/account/list";
     }
+
+    /**
+     * 编辑账户信息
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/update/{id:\\d+}")
     public String updateAccount(@PathVariable Integer id, Model model) {
 
@@ -76,6 +94,12 @@ public class AccountController {
         return "redirect:/account/list";
     }
 
+    /**
+     * 获取账户列表
+     * @param pageNo
+     * @param model
+     * @return
+     */
     @GetMapping("/list")
     public String accountList(@RequestParam(required = false,defaultValue ="1",name = "p") Integer pageNo,
                               Model model) {
@@ -83,6 +107,11 @@ public class AccountController {
         PageInfo<Account> accountPageInfo = accountService.findAccountListByPage(pageNo);
         model.addAttribute("accountPageInfo",accountPageInfo);
         return "account/list";
+    }
+
+    @GetMapping("/home")
+    public String homePage() {
+        return "account/home";
     }
 
 }

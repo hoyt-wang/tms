@@ -42,7 +42,7 @@ public interface AccountService {
      * @param newPassword
      * @param confirmPassword
      */
-    void updatePassword(Account account, String password, String newPassword, String confirmPassword);
+    void updatePassword(Account account, String password, String newPassword, String confirmPassword) throws ServiceException;
 
 
     void saveAccount(Account account,Integer[] roleId) throws ServiceException;
@@ -67,4 +67,13 @@ public interface AccountService {
      * @return
      */
     StoreAccount findStoreAccountByMobile(String userName);
+
+    /**
+     * 更改密码
+     * @param account
+     * @param password
+     * @param newPassword
+     * @param confirmPassword
+     */
+    void changePassword(Account account, String password, String newPassword, String confirmPassword);
 }
